@@ -1,0 +1,138 @@
+# complete the example and description for this function 
+# then test it 
+def initialize_board() -> list: 
+  ''' 
+  return a list or strings representing a checkers board with 1 as the checkers piece of player 1, 2 as the checker piece of player 2, 0 as a blank space to which checker pieces can move, and a space for a blank space to which checker pieces cannot be moved
+  >>>initialize_board(["1 1 1 1 ", " 1 1 1 1", "1 1 1 1 ", " 0 0 0 0", "0 0 0 0 ", " 2 2 2 2", "2 2 2 2 ", " 2 2 2 2"])
+  ["1 1 1 1 ", " 1 1 1 1", "1 1 1 1 ", " 0 0 0 0", "0 0 0 0 ", " 2 2 2 2", "2 2 2 2 ", " 2 2 2 2"]
+  '''
+ b = [" 1 1 1 1", "1 1 1 1 ", " 1 1 1 1", "0 0 0 0 ",  " 0 0 0 0", "2 2 2 2 ", " 2 2 2 2", "2 2 2 2 "] 
+ return b 
+
+# write this function according to the function design recipe 
+def display_board(board) -> str: 
+  '''
+  return string with every row starting from a new line, with 1 as the first players checker piece, 2 as the second players checker piece, 0 as the blank spaces to which players can move their pieces, and a space for a blank space to which players are not allowed to move their pieces
+  >>>display_board([" 1 1 1 1", "1 1 1 1 ", " 1 1 1 1", "0 0 0 0 "," 0 0 0 0", "2 2 2 2 ", " 2 2 2 2", "2 2 2 2 "])
+  " 1 1 1 1
+  1 1 1 1 
+  1 1 1 1
+ 0 0 0 0 
+  0 0 0 0 
+ 2 2 2 2 
+  2 2 2 2
+ 2 2 2 2
+  '''
+s=""
+for string in board:
+  s = s + string + "/n"
+  return s
+
+# write this function according to the function design recipe 
+def valid_piece(board, piece) -> bool: 
+ '''
+ return True iff the piece you want to select is not blank space, its not the second player's piece, and it is the correct player's piece that is able to move one spot diagonally forward. If not, return False. 
+ >>>valid_piece(5,1)
+ False
+ >>>valid_piece(5,6)
+ True
+ '''
+   board_row=board[a]
+   if board_row[e] == 1 or 2
+   return True
+   else:
+     return False
+
+# write this function according to the function design recipe 
+def valid_move(board, move, piece) -> bool: 
+   '''
+  return True iff the move for a specific piece "piece" to "move" is valid, and for it to be valid it has to be a move that can be made one step forward diagonally and with no other player's checker piece at the place where the move is about to be made to. Othrwise, return False
+  >>>valid_move(b,(4,6),(5,6))
+  False
+  >>>valid_move(b,(4,7),(5,6))
+  True
+  '''
+  a=int(piece(0))
+  e=int(piece(1))
+
+  c=int(move(0))
+  d=int(move(1))
+  piece_row=board[a]
+  move_row=board[c]
+  if board_row[e]=1:
+    if move_row[d]=0:
+      if c-a=1 and d-a=0
+      return True
+  if board_row[e]=2:
+    if move_row[d]=0:
+      if c-a=-1 and d-a=0
+      return True
+    else:
+      return False 
+
+# write examples for this function, then complete the code body 
+# and test it. 
+def update_board(board : list, move : str, piece : str, player : int) -> bool: 
+ """
+ Update board by moving piece to move. Return True if and only if the opposing player (the one that is not moving a piece) has no valid moves after updating the game. 
+  >>>(b,"4,7","5,6",1)
+ False
+  """
+  piece_row=board[a]
+  move_row=board[c]
+  list_length=len(board)
+  if valid_piece(board,piece):
+    if valid_move(board,move,piece):
+      temporary_var=move_row[d]
+      move_row[d]=piece_row[e]
+      piece_row[e]=temporary_var
+      update_player(player)
+      for row_number in range(list_length):
+        opposing_piece=board[row_number]
+        list_element_length=len(opposing_piece)
+        for column_number in range(list_element):
+          opposing_piece=str(row_number)+str(column_number)
+          if valid_piece(board,opposing_piece):
+            for row_number2 in range(list_length):
+              for column_number2 in range(list_element):
+                opposing_move=str(row_number2)+str(column_number2)
+                if valid_move(board,opposing_move,opposing_piece):
+                  if player==player1 and opposing_piece[column_number]=="1"
+                  update_player(player)
+                  return True
+                  if player=player2 and opposing_piece[column_number]=="2"
+                  update_player(player)
+                  return True
+              else:
+                return False
+
+# write this function according to the function design recipe. 
+def update_player(player) -> int: 
+  '''
+  return a new player, if player1 was making moves switch to player2, else switch to player1
+  >>>update_player(1)
+  2
+  >>>update_player(2)
+  1
+  '''
+  if player1
+  player2
+  else:
+    player1
+
+if __name__ == "__main__": 
+    board = initilaize_board() 
+    player = 1 
+    gameover = False 
+    while not gameover: 
+        print(display_board(board)) 
+        piece = input("Player {}, which piece would you like to move?".format(player)) 
+        while not valid_piece(board, piece): 
+            piece = input("Player {}, pick a valid piece".format(player)) 
+        move = input("Player {}, where would you like to move the piece at {}?".format(player, piece)) 
+        while not valid_move(board, move, piece): 
+            move = input("Player {}, pick a valid move for the piece at {}.".format(player, piece)) 
+        gameover = update_board(board, move, piece, player)
+        player = update_player(player) 
+    player = update_player(player) 
+    print("Game over, player {} wins!".format(player))
